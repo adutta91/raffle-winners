@@ -26,17 +26,20 @@ function fillRaffleBucket(participants) {
 	const bucket = [];
 
 	participants.forEach(participant => {
+		// put a ticket w/ participant's name in bucket for each point they earned
 		for (let i = 0; i < participant.points; i++) {
 			bucket.push(participant.name);
 		}
 	});
 
+	// shuffle the bucket, and return the array
 	return shuffle(bucket);
 }
 
 function findWinner(participants) {
 	const bucket = fillRaffleBucket(participants);
 
+	// choose random idx to select winner
 	const randIdx = Math.floor(Math.random() * bucket.length);
 
 	return bucket[randIdx];
