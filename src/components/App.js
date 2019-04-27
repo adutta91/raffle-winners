@@ -12,8 +12,8 @@ class App extends Component {
   
   chooseWinner = e => {
     // remove previous winners from participant pool
-    let participantPool = filter(participants, participant => !includes(this.state.winners, participant.name));
-    
+    let participantPool = filter(participants, participant => participant.points && !includes(this.state.winners, participant.name));
+    console.log('participantPool *****---->>>', participantPool);
     if (size(participantPool)) {
       // add winner to state list
       this.setState(prev => ({ winners : [ ...prev.winners, findWinner(participantPool) ]}))
