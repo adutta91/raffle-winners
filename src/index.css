@@ -1,0 +1,18 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.btn-outline {
+    transition: all .2s ease-out;
+    background: transparent;
+    color: #1e7e34;
+}
+
+.btn-outline:hover {
+    background: #1e7e34;
+    color: white;
+}

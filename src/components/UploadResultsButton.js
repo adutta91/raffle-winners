@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import '../styles/UploadResultsButton.css';
 import CsvParser from '../assets/csv-parser';
 
 class UploadResultsButton extends Component {
@@ -25,9 +25,9 @@ class UploadResultsButton extends Component {
     
     render() {
         return (
-            <label className="btn btn-success">
+            <label className="btn btn-success btn-outline btn-upload">
                 <input type="file" hidden={true} onChange={this.onFile}/>
-                Upload Particpants
+                Upload Results
             </label>
         );
     }

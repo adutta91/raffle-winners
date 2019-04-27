@@ -3,9 +3,10 @@ import '../styles/App.css';
 import { filter, size, map, includes } from 'lodash';
 
 import findWinner from '../assets/find-winner';
+import startConfetti from '../assets/confetti';
 
+import Header from './Header';
 import UploadResultsButton from './UploadResultsButton';
-import { conditionalExpression } from '@babel/types';
 
 class App extends Component {
   state = {
@@ -15,12 +16,14 @@ class App extends Component {
   
   chooseWinner = e => {
     const { participants } = this.state;
+    
     // remove previous winners from participant pool
     let participantPool = filter(participants, participant => participant.points && !includes(this.state.winners, participant.name));
     
     if (size(participantPool)) {
       // add winner to state list
-      this.setState(prev => ({ winners : [ ...prev.winners, findWinner(participantPool) ]}))
+      this.setState(prev => ({ winners : [ ...prev.winners, findWinner(participantPool) ]}));
+      startConfetti();
     } else {
       // alert user if no more available winners
       alert('No more eligible participants!');
@@ -31,6 +34,7 @@ class App extends Component {
     this.setState({ participants });
   }
   
+  // syntactic sugar helper function
   conditionalDisplay(content, condition) {
     return condition ? content : null;
   }
@@ -39,26 +43,30 @@ class App extends Component {
     const { participants, winners } = this.state;
     
     return (
-      <div className="App">
-        <UploadResultsButton onUpload={this.updateParticipants} />
+      <div className="App wrapper">
+        <Header>
+          <UploadResultsButton onUpload={this.updateParticipants} />
+        </Header>
         
         {this.conditionalDisplay(
-          <div
-            className="btn btn-success"
-            onClick={this.chooseWinner}
-          >
-            Pull Ticket From Bucket
-          </div>,
+          <section id='pull-ticket'>
+            <div
+              className="btn btn-success"
+              onClick={this.chooseWinner}
+            >
+              Pull Ticket From Bucket
+            </div>
+          </section>,
           size(participants)
         )}
         
         {this.conditionalDisplay(
-          <React.Fragment>
+          <section id='winners'>
             <h3>Winners</h3>
             <ul>
               {map(winners, winner => <li key={winner} className="winner">{winner}</li>)}
             </ul>
-          </React.Fragment>,
+          </section>,
           size(winners)
         )}
         
