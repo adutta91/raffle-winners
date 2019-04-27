@@ -14,6 +14,12 @@ class App extends Component {
     winners : [],
   }
   
+  celebrate() {
+    startConfetti();
+    document.getElementById("cheer").play();
+    document.getElementById("tada").play();
+  }
+  
   chooseWinner = e => {
     const { participants } = this.state;
     
@@ -23,7 +29,7 @@ class App extends Component {
     if (size(participantPool)) {
       // add winner to state list
       this.setState(prev => ({ winners : [ ...prev.winners, findWinner(participantPool) ]}));
-      startConfetti();
+      this.celebrate();
     } else {
       // alert user if no more available winners
       alert('No more eligible participants!');
