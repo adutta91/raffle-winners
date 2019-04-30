@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+// expects csv to be a specific structure
+// ie, the first two columns being name and total points respectively
 function CsvParser(txt) {
     let rows = txt.split('\n');
     
