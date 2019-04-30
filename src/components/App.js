@@ -46,19 +46,22 @@ class App extends Component {
   }
   
   render() {
-    const { participants, winners } = this.state;
+    const {
+      conditionalDisplay, updateParticipants, chooseWinner,
+      state : { participants, winners }
+     } = this;
     
     return (
       <div className="App wrapper">
         <Header>
-          <UploadResultsButton onUpload={this.updateParticipants} />
+          <UploadResultsButton onUpload={updateParticipants} />
         </Header>
         
-        {this.conditionalDisplay(
+        {conditionalDisplay(
           <section id='pull-ticket'>
             <div
               className="btn btn-success"
-              onClick={this.chooseWinner}
+              onClick={chooseWinner}
             >
               Pull Ticket From Bucket
             </div>
@@ -66,11 +69,13 @@ class App extends Component {
           size(participants)
         )}
         
-        {this.conditionalDisplay(
+        {conditionalDisplay(
           <section id='winners'>
             <h3>Winners</h3>
             <ul>
-              {map(winners, winner => <li key={winner} className="winner">{winner}</li>)}
+              {map(winners, winner => (
+                <li key={winner} className="winner">{winner}</li>
+              ))}
             </ul>
           </section>,
           size(winners)
