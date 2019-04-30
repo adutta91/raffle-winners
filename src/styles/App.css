@@ -6,8 +6,9 @@ body {
   
 .wrapper {
     position: relative;
-    min-height: 100vh;
+    height: 100vh;
     padding: 20px;
+    overflow-y: scroll;
 }
   
 [class|="confetti"] {
